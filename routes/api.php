@@ -14,7 +14,7 @@ Route::group(['prefix' => 'admin'], function () {
 
         // cuti route
         Route::get('/cuti', 'CutiController@index');
-        Route::post('/cuti/{id}', 'CutiController@confirmCuti');
+        Route::patch('/cuti/{id}', 'CutiController@confirmCuti');
 
         // kehadiran route
         Route::post('/kehadiran', 'KehadiranController@store');
