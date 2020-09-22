@@ -14,7 +14,7 @@ class AddKeterlambatanToKehadirans extends Migration
     public function up()
     {
         Schema::table('kehadirans', function (Blueprint $table) {
-            $table->string('keterlambatan');
+            $table->string('keterlambatan')->nullable();
         });
     }
 
