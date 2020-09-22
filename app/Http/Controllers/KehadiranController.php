@@ -18,7 +18,7 @@ class KehadiranController extends Controller
         return DB::table('kehadirans')
             ->join('users', 'users.id', '=', 'user_id')
             ->join('locations', 'locations.id', '=', 'location_id')
-            ->select('users.name AS name', 'locations.name AS location', 'kehadirans.imei', 'kehadirans.created_at')
+            ->select('users.name AS name', 'locations.name AS location', 'kehadirans.imei', 'kehadirans.created_at', 'kehadirans.keterlambatan', 'kehadirans.status')
             ->get();
     }
 
@@ -45,6 +45,7 @@ class KehadiranController extends Controller
         $kehadiran->location_id = $request->location_id;
         $kehadiran->status = $request->status;
         $kehadiran->imei = $request->imei;
+        $kehadiran->keterlambatan = $request->keterlambatan;
 
         $kehadiran->save();
         return response()->json();

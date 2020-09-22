@@ -16,6 +16,12 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/cuti', 'CutiController@index');
         Route::patch('/cuti/{id}', 'CutiController@confirmCuti');
 
+        // jadwal route
+        Route::get('/jadwal', 'JadwalController@index');
+        Route::post('/jadwal', 'JadwalController@store');
+        Route::patch('/jadwal', 'JadwalController@update');
+
+
         // kehadiran route
         Route::post('/kehadiran', 'KehadiranController@store');
         Route::get('/kehadiran', 'KehadiranController@index');
@@ -33,6 +39,8 @@ Route::group(['prefix' => 'user'], function () {
     // auth route
     Route::post('/register', 'UserController@register');
     Route::post('/login', 'UserController@login');
+    // jadwal route
+    Route::get('/jadwal', 'JadwalController@index');
 
     Route::group(['middleware' => 'jwtMiddleware'], function () {
         Route::post('/member/{id}', 'UserController@update');
