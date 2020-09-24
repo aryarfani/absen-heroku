@@ -76,7 +76,7 @@ class UserController extends Controller
     public function getKehadiran($id)
     {
         $user = User::find($id);
-        return response()->json($user->kehadiran->sortByDesc('created_at')->values());
+        return response()->json($user->kehadiran->sortByDesc('id')->values());
     }
 
     //* Fungsi mengupdate data user
