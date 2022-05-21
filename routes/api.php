@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'admin'], function () {
@@ -21,7 +20,6 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('/jadwal', 'JadwalController@store');
         Route::patch('/jadwal', 'JadwalController@update');
 
-
         // kehadiran route
         Route::post('/kehadiran', 'KehadiranController@store');
         Route::get('/kehadiran', 'KehadiranController@index');
@@ -34,8 +32,7 @@ Route::group(['prefix' => 'admin'], function () {
     });
 });
 
-
-Route::group(['prefix' => 'user'], function () {
+Route::group(['prefix' => 'user', 'as' => 'users.'], function () {
     // auth route
     Route::post('/register', 'UserController@register');
     Route::post('/login', 'UserController@login');
@@ -56,6 +53,6 @@ Route::group(['prefix' => 'user'], function () {
         Route::get('/{id}/cuti', 'CutiController@getCutibyUserId');
 
         // Lokasi Route
-        Route::resource('/location', 'LocationController')->only('index');
+        Route::resource('/location', 'LocationController');
     });
 });
