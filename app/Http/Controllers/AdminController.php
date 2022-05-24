@@ -34,15 +34,19 @@ class AdminController extends Controller
 
         return $this->respondWithToken($token);
     }
-    public function getAuthUser(Request $request)
+
+    public function getAuthUser()
     {
         return response()->json(Auth::guard('admin')->user());
     }
+
     public function logout()
     {
         Auth::guard('admin')->logout();
+
         return response()->json(['message' => 'Successfully logged out']);
     }
+
     protected function respondWithToken($token)
     {
         return response()->json([

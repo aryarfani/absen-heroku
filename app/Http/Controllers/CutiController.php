@@ -16,14 +16,23 @@ class CutiController extends Controller
             ->select('users.name as name', 'cutis.*')
             ->get();
     }
+
     public function getCutibyUserId($id)
     {
         $user = User::find($id);
+
         return response()->json($user->cuti->sortByDesc('created_at')->values());
     }
 
     public function store($id, Request $request)
     {
+        $this->validate($request, [
+            'judul' => ['required', 'min:5', 'max:191'],
+            'keterangan' => ['required', 'min:5', 'max:191'],
+            'tanggal_mulai' => ['required', 'date',],
+            'tanggal_akhir' => ['required', 'date', 'after:tanggal_mulai'],
+        ]);
+
         $cuti = new Cuti();
         $cuti->user_id = $id;
         $cuti->judul = $request->judul;
@@ -31,8 +40,8 @@ class CutiController extends Controller
         $cuti->tanggal_mulai = $request->tanggal_mulai;
         $cuti->tanggal_akhir = $request->tanggal_akhir;
         $cuti->status = $request->status;
-
         $cuti->save();
+
         return response()->json();
     }
 
@@ -41,6 +50,7 @@ class CutiController extends Controller
         // Menconfirmasi cuti
         $cuti = Cuti::find($id);
         $cuti->update(array('status' => 1));
+
         return response()->json($cuti);
     }
 }

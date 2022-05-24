@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Kehadiran;
-use Illuminate\Http\Request;
 use App\User;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
@@ -14,21 +14,19 @@ class UserController extends Controller
     public function register(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required',
-            'email' => 'required',
-            'address' => 'required',
-            'phone' => 'required',
-            'npm' => 'required',
+            'name' => ['required', 'min:5', 'max:191'],
+            'email' => ['required', 'min:5', 'max:191'],
+            'address' => ['required', 'min:5', 'max:191'],
+            'phone' => ['required', 'min:5', 'max:191'],
+            'npm' => ['required', 'min:5', 'max:191'],
+            'password' => ['required', 'min:5', 'max:191'],
             'gambar' => 'required',
-            'password' => 'required',
         ]);
-
 
         $image = $request->file('gambar');
 
         $new_name = rand() . '.' . $image->getClientOriginalExtension();
         $image->move(base_path('public/images'), $new_name);
-
 
         $user = User::create([
             'name' => $request->name,
@@ -55,15 +53,19 @@ class UserController extends Controller
 
         return $this->respondWithToken($token);
     }
-    public function getAuthUser(Request $request)
+
+    public function getAuthUser()
     {
         return response()->json(auth()->user());
     }
+
     public function logout()
     {
         auth()->logout();
+
         return response()->json(['message' => 'Successfully logged out']);
     }
+
     protected function respondWithToken($token)
     {
         return response()->json([
@@ -76,12 +78,23 @@ class UserController extends Controller
     public function getKehadiran($id)
     {
         $user = User::find($id);
+
         return response()->json($user->kehadiran->sortByDesc('id')->values());
     }
 
     //* Fungsi mengupdate data user
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'name' => ['required', 'min:5', 'max:191'],
+            'email' => ['required', 'min:5', 'max:191'],
+            'address' => ['required', 'min:5', 'max:191'],
+            'phone' => ['required', 'min:5', 'max:191'],
+            'npm' => ['required', 'min:5', 'max:191'],
+            'password' => ['nullable', 'min:5', 'max:191'],
+            'gambar' => ['nullable'],
+        ]);
+
         $member = User::findOrFail($id);
 
         //* mengambil gambar lama
@@ -123,6 +136,7 @@ class UserController extends Controller
     public function getAllUser()
     {
         $user = User::all();
+
         return response()->json($user);
     }
 }
