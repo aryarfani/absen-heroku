@@ -27,8 +27,8 @@ class CutiController extends Controller
     public function store($id, Request $request)
     {
         $this->validate($request, [
-            'judul' => ['required', 'min:5', 'max:191'],
-            'keterangan' => ['required', 'min:5', 'max:191'],
+            'judul' => ['required', 'min:5', 'max:40'],
+            'keterangan' => ['required', 'min:5', 'max:120'],
             'tanggal_mulai' => ['required', 'date',],
             'tanggal_akhir' => ['required', 'date', 'after:tanggal_mulai'],
         ]);

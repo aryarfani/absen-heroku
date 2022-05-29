@@ -14,12 +14,12 @@ class UserController extends Controller
     public function register(Request $request)
     {
         $this->validate($request, [
-            'name' => ['required', 'min:5', 'max:191'],
-            'email' => ['required', 'min:5', 'max:191'],
-            'address' => ['required', 'min:5', 'max:191'],
-            'phone' => ['required', 'min:5', 'max:191'],
+            'name' => ['required', 'min:5', 'max:40'],
+            'email' => ['required', 'min:5', 'max:40'],
+            'address' => ['required', 'min:5', 'max:40'],
+            'phone' => ['required', 'min:5', 'max:40'],
             'npm' => ['required', 'size:15'],
-            'password' => ['required', 'min:5', 'max:191'],
+            'password' => ['required', 'min:5', 'max:40'],
             'gambar' => 'required',
         ]);
 
@@ -86,12 +86,12 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'name' => ['required', 'min:5', 'max:191'],
-            'email' => ['required', 'min:5', 'max:191'],
-            'address' => ['required', 'min:5', 'max:191'],
-            'phone' => ['required', 'min:5', 'max:191'],
+            'name' => ['required', 'min:5', 'max:40'],
+            'email' => ['required', 'min:5', 'max:40'],
+            'address' => ['required', 'min:5', 'max:40'],
+            'phone' => ['required', 'min:5', 'max:40'],
             'npm' => ['required', 'size:15'],
-            'password' => ['nullable', 'min:5', 'max:191'],
+            'password' => ['nullable', 'min:5', 'max:40'],
             'gambar' => ['nullable'],
         ]);
 
