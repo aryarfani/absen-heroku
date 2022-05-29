@@ -18,7 +18,7 @@ class UserController extends Controller
             'email' => ['required', 'min:5', 'max:191'],
             'address' => ['required', 'min:5', 'max:191'],
             'phone' => ['required', 'min:5', 'max:191'],
-            'npm' => ['required', 'min:5', 'max:191'],
+            'npm' => ['required', 'size:15'],
             'password' => ['required', 'min:5', 'max:191'],
             'gambar' => 'required',
         ]);
@@ -90,7 +90,7 @@ class UserController extends Controller
             'email' => ['required', 'min:5', 'max:191'],
             'address' => ['required', 'min:5', 'max:191'],
             'phone' => ['required', 'min:5', 'max:191'],
-            'npm' => ['required', 'min:5', 'max:191'],
+            'npm' => ['required', 'size:15'],
             'password' => ['nullable', 'min:5', 'max:191'],
             'gambar' => ['nullable'],
         ]);
