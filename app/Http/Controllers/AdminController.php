@@ -12,6 +12,13 @@ class AdminController extends Controller
 
     public function register(Request $request)
     {
+        $this->validate($request, [
+            'name' => ['required', 'min:5', 'max:40'],
+            'email' => ['required', 'min:5', 'max:40'],
+            'phone' => ['required', 'min:5', 'max:40'],
+            'password' => ['required', 'min:5', 'max:40'],
+        ]);
+
         $admin = Admin::create([
             'name' => $request->name,
             'email' => $request->email,
