@@ -20,7 +20,7 @@ class UserController extends Controller
             'phone' => ['required', 'min:5', 'max:40'],
             'npm' => ['required', 'size:15'],
             'password' => ['required', 'min:5', 'max:40'],
-            'gambar' => 'required',
+            'gambar' => ['required', 'image', 'max:1000'],
         ]);
 
         $image = $request->file('gambar');
@@ -92,7 +92,7 @@ class UserController extends Controller
             'phone' => ['required', 'min:5', 'max:40'],
             'npm' => ['required', 'size:15'],
             'password' => ['nullable', 'min:5', 'max:40'],
-            'gambar' => ['nullable'],
+            'gambar' => ['nullable', 'image', 'max:1000'],
         ]);
 
         $member = User::findOrFail($id);
